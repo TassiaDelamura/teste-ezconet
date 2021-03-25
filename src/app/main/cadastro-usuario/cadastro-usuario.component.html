@@ -1,0 +1,75 @@
+<h5 class="card-title mb-4">Cadastro de Usuário</h5>
+<form [formGroup]="form" (ngSubmit)="salvar()" novalidate>
+    <!-- NOME -->
+    <div class="form-group row">
+        <label for="inputNome" class="col-sm-2 col-form-label">Nome*</label>
+        <div class="col-sm">
+            <input type="text" class="form-control" [ngClass]="obterClasseDeValidacao('nome')" placeholder="Nome"
+                id="inputNome" formControlName="nome">
+            <div class="invalid-feedback">
+                Campo obrigatório
+            </div>
+        </div>
+    </div>
+
+    <!-- DATA DE NASCIMENTO -->
+    <div class="form-group row">
+        <label for="inputDataNascimento" class="col-sm-2 col-form-label">Data de Nascimento*</label>
+        <div class="col-sm">
+            <input type="date" class="form-control" [ngClass]="obterClasseDeValidacao('dataNascimento')"
+                id="inputDataNascimento" formControlName="dataNascimento">
+            <div class="invalid-feedback">
+                Campo obrigatório
+            </div>
+        </div>
+    </div>
+
+    <!-- E-MAIL -->
+    <div class="form-group row">
+        <label for="inputEmail" class="col-sm-2 col-form-label">E-mail*</label>
+        <div class="col-sm">
+            <input type="email" class="form-control" [ngClass]="obterClasseDeValidacao('email')" placeholder=" E-mail"
+                id="inputEmail" formControlName="email">
+            <div class="invalid-feedback">
+                Campo obrigatório
+            </div>
+        </div>
+    </div>
+
+    <!-- SENHA -->
+    <div class="form-group row">
+        <label for="inputSenha" class="col-sm-2 col-form-label">Senha*</label>
+        <div class="col-sm">
+            <input type="password" class="form-control" [ngClass]="obterClasseDeValidacao('senha')" placeholder=" Senha"
+                id="inputSenha" formControlName="senha">
+            <div class="invalid-feedback">
+                Campo obrigatório
+            </div>
+        </div>
+    </div>
+
+    <!-- SEXO -->
+    <div class="form-group row">
+        <label for="selectSexo" class="col-sm-2 col-form-label">Sexo*</label>
+        <div class="col-sm">
+            <select class="custom-select" id="selectSexo" [ngClass]="obterClasseDeValidacao('sexo')"
+                formControlName="sexo">
+                <option value="">Selecione...</option>
+                <option value="F">Feminino</option>
+                <option value="M">Masculino</option>
+            </select>
+            <div class="invalid-feedback">
+                Campo obrigatório
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTÃO SUBMIT -->
+    <div class="form-group row">
+        <div class="offset-sm-2 col-sm">
+            <button type="submit" class="btn btn-primary">
+                Salvar
+            </button>
+        </div>
+    </div>
+</form>

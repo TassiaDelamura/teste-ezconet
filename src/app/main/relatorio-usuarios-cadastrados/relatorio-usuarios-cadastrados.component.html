@@ -1,0 +1,87 @@
+<h5 class="card-title mb-4">Relatório de Usuários Cadastrados</h5>
+<form [formGroup]="form" (ngSubmit)="filtrar()" novalidate>
+    <!-- NOME -->
+    <div class="form-group row">
+        <label for="inputNome" class="col-sm-2 col-form-label">Nome</label>
+        <div class="col-sm">
+            <input type="text" class="form-control" placeholder="Nome" id="inputNome" formControlName="nome">
+        </div>
+    </div>
+
+    <!-- ATIVO -->
+    <div class="form-group row">
+        <label for="selectAtivo" class="col-sm-2 col-form-label">Ativo</label>
+        <div class="col-sm">
+            <select class="custom-select" id="selectAtivo" formControlName="ativo">
+                <option value="">Selecione...</option>
+                <option value="true">Sim</option>
+                <option value="false">Não</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- BOTÃO FILTRAR -->
+    <div class="form-group row">
+        <div class="offset-sm-2 col-sm">
+            <button type="submit" class="btn btn-primary mr-3 btn-filtrar">
+                Filtrar
+            </button>
+            <button type="button" class="btn btn-primary btn-limpar" (click)="limpar()">
+                Limpar
+            </button>
+        </div>
+    </div>
+
+</form>
+
+<div class="table-responsive" *ngIf="filtrado">
+    <div class="alert alert-warning" role="alert" *ngIf="usuarios.length == 0">
+        Nenhum registro foi encontrado
+    </div>
+    <table class="table" *ngIf="usuarios.length > 0">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Data de Nascimento</th>
+                <th>E-mail</th>
+                <th>Sexo</th>
+                <th>Ativo</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let usuario of usuarios">
+                <td>
+                    {{usuario.nome}}
+                </td>
+                <td>
+                    {{obterDataFormatoLocal(usuario.dataNascimento)}}
+                </td>
+                <td>
+                    {{usuario.email}}
+                </td>
+                <td>
+                    {{obterDescricaoSexo(usuario.sexo)}}
+                </td>
+                <td>
+                    <span class="badge" [ngClass]="obterClasseBadge(usuario)">
+                        {{obterDescricaoAtivo(usuario.ativo)}}
+                    </span>
+                </td>
+                <td>
+                    <button *ngIf="!usuario.ativo" type="button" class="btn btn-sm btn-outline-secondary btn-ativo"
+                        (click)="ativar(usuario)">
+                        Ativar
+                    </button>
+
+                    <button *ngIf="usuario.ativo" type="button" class="btn btn-sm btn-outline-secondary btn-ativo"
+                        (click)="desativar(usuario)">
+                        Desativar
+                    </button>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+</div>
